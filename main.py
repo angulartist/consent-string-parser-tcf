@@ -28,12 +28,24 @@ class Decoder:
 
     @staticmethod
     def base64_to_stream(segment: str) -> UnalignedStream:
+        """
+        Convert b64 to an unaligned bit stream.
+        Add padding. Python doesnt complain about extra padding.
+        :param segment:
+        :return:
+        """
         encoded = (segment + "===").encode()
         source = BytesIO(base64.urlsafe_b64decode(encoded))
 
         return UnalignedStream(source)
 
     def obj_to_dict(self, obj):
+        """
+        Convert an object to a dict.
+        Class are objects. That's fine then.
+        :param obj:
+        :return:
+        """
         if not hasattr(obj, "__dict__"):
             return obj
         result = {}
@@ -50,7 +62,13 @@ class Decoder:
         return result
 
     def process(self):
+        """
+        Yeay do some processing woah such fun.
+        :return:
+        """
         core, *other_segments = self.consent_string.split(".")
+
+        # Handle core string (seg: 0)
 
         stream = self.base64_to_stream(core)
 
@@ -59,6 +77,8 @@ class Decoder:
         except Exception:
             raise Exception('Core: Incorrect consent string format.')
         self.results.append(self.obj_to_dict(obj))
+
+        # Handle rest (seg 1)
 
         for segment in other_segments:
             stream = self.base64_to_stream(segment)
