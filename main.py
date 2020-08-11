@@ -2,7 +2,9 @@ import base64
 
 from kaitaistruct import BytesIO
 
-from core_segment import CoreSegment
+from generated.core_segment import CoreSegment
+from generated.oob_segment import OobSegment
+from generated.ptc_segment import PtcSegment
 from lib.consts import (
     OOB_SEGMENT_TYPES,
     PUBLISHER_TC_SEGMENT_TYPE,
@@ -10,8 +12,6 @@ from lib.consts import (
 from lib.models import (
     UnalignedStream,
 )
-from oob_segment import OobSegment
-from ptc_segment import PtcSegment
 
 
 def decode(cs: str):
