@@ -30,9 +30,12 @@ types:
             type: alpha
     doc: 'TC Consent Management Platform'
     seq:
+      - id: segment_type
+        type: b3
+        doc: 'TMP: Its fine until we reach version 7+'
       - id: version
         doc: 'Supported version is above 2 (TCF 2.O)'
-        type: b6
+        type: b3
       - id: created
         doc: 'Timestamp'
         type: b36
